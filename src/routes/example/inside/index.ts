@@ -1,4 +1,4 @@
-import { FastifyPluginAsync } from "fastify";
+import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 
 const deepInsideExample: FastifyPluginAsync = async (
   fastify,
@@ -16,10 +16,12 @@ const deepInsideExample: FastifyPluginAsync = async (
     method: "GET", 
     url: "/inside/:param1", 
     schema: {params : paramsJsonSchema},
-    handler: async function (request, reply) {
+    handler: async function (request: FastifyRequest, reply: FastifyReply) {
         const {param1} = request.params as { param1: string;}
         console.log('contain param1? >',param1);
-        return 'this is an deep inside example'
+        reply.status(200);
+        reply.send('this is an deep inside example with reply.send()');
+        return 
     }
   });
 
