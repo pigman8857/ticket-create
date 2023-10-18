@@ -15,6 +15,12 @@ const app: FastifyPluginAsync<AppOptions> = async (
 ): Promise<void> => {
   // Place here your custom code!
 
+  fastify.addHook('onRequest', async (request, reply) => {
+    console.log('hook onRequest');
+    console.log('request >',request);
+  })
+
+
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins
