@@ -17,7 +17,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
 
   fastify.addHook('onRequest', async (request, reply) => {
     console.log('hook onRequest');
-    console.log('request >',request);
   })
 
 
