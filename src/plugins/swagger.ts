@@ -19,13 +19,13 @@ export default fp<FastifySwaggerOptions>(async (fastify) => {
         url: "https://swagger.io",
         description: "Find more info here",
       },
-      host: "localhost",
+      host: "localhost:3000",
       schemes: ["http"],
       consumes: ["application/json"],
       produces: ["application/json"],
       tags: [
-        { name: "user", description: "User related end-points" },
-        { name: "code", description: "Code related end-points" },
+        { name: "example", description: "Example related end-points" },
+        { name: "default", description: "Default end-points" },
       ],
       definitions: {
         User: {

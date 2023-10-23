@@ -1,12 +1,24 @@
-import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify"
+import { FastifyPluginAsync, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
 import inside from './inside'
 
 const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   inside(fastify, opts);
 
+  const defaultSchema : FastifySchema = {
+    params: {},
+    tags: ['example'],
+  }
+
+  const createSchema: FastifySchema = {
+    params: {},
+    tags: ['example'],
+  }
+
+
   fastify.route({
     method: 'GET',
+    schema: defaultSchema,
     url: '/',
     preHandler: async (request, reply) => {
       // E.g. check authentication
@@ -26,6 +38,7 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   fastify.route({
     method: 'POST',
+    schema: createSchema,
     url: '/create',
     preHandler: async (request, reply) => {
       // E.g. check authentication
