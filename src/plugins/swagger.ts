@@ -20,7 +20,7 @@ export default fp<FastifySwaggerOptions>(async (fastify) => {
         description: "Find more info here",
       },
       host: "localhost:3000",
-      schemes: ["http","https"],
+      schemes: ["http"],
       consumes: ["application/json"],
       produces: ["application/json"],
       tags: [
