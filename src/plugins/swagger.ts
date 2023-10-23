@@ -10,7 +10,7 @@ import { hostname } from "os";
  */
 export default fp<FastifySwaggerOptions>(async (fastify) => {
   
-  console.log('hostname',hostname);
+  console.log('hostname',hostname());
 
   fastify.register(fastifySwagger, {
     swagger: {
