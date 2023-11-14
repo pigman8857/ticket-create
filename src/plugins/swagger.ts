@@ -1,8 +1,5 @@
 import fp from "fastify-plugin";
 import fastifySwagger, { FastifySwaggerOptions } from "@fastify/swagger";
-import * as os from "os";
-import * as dns from 'dns';
-
 /**
  * This plugins adds swagger and swagger-ui
  *
@@ -11,9 +8,6 @@ import * as dns from 'dns';
  */
 export default fp<FastifySwaggerOptions>(async (fastify) => {
   
-  console.log('hostname >',os.hostname());
-  console.log('servers > ',dns.getServers());
-
   fastify.register(fastifySwagger, {
     swagger: {
       info: {
@@ -25,7 +19,7 @@ export default fp<FastifySwaggerOptions>(async (fastify) => {
         url: "https://swagger.io",
         description: "Find more info here",
       },
-      host: `0.0.0.0:3000`,
+      host: `${fastify.configs.host}:${fastify.configs.port}`,
       schemes: ["http","https"],
       consumes: ["application/json"],
       produces: ["application/json"],
