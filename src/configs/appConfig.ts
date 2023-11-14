@@ -42,7 +42,7 @@ export const getSSMClient = async () => {
         const data = await client.send(command);
         console.log('GetParametersCommand data  > ',data);
     } catch (error) {
-        console.error('',error);
+        console.error('!!!Error!!! -> ',error);
     } finally {
         console.log('###### getSSMClient() ended #### ');
     }
