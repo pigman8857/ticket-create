@@ -12,7 +12,7 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
     return 'hugs'
   })
   console.log('Call getSSMClient');
-  getSSMClient();
+  await getSSMClient();
   console.log('Call getEnv');
   const env = getEnv();
   console.log('env > ',env);
