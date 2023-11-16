@@ -16,8 +16,7 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
   const env = getEnv();
 
   const ssmClient = getSSMClient(env);
-  const parameters = await getParameters(ssmClient);
-  console.log('parameters >',parameters);
+  await getParameters(ssmClient);
   // console.log('appConfig > ',appConfig);
   fastify.decorate('configs', {host: 'ec2-18-138-67-142.ap-southeast-1.compute.amazonaws.com', port: '3000'} );
 })

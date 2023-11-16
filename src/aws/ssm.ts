@@ -28,12 +28,13 @@ export const getParameters = async (
   try {
     const params: GetParametersCommandInput = {
       /** input parameters */
-      Names: ["ticket-create_host_server", "ticket-create_port"],
+      Names: ["my_service_configs"],
       WithDecryption : true
     };
     const command = new GetParametersCommand(params);
     data = await client.send(command);
     console.log("GetParametersCommand data  > ", data);
+    console.log("GetParametersCommand data.Parameter  > ", data.Parameter);
   } catch (error) {
     console.error("!!!Error!!! -> ", error);
   } finally {

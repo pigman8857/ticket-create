@@ -20,8 +20,7 @@ export const getEnv = () : Env => {
         }  
     }
 }
-
-
+  
 
 export const getConfigs = (env: Env) => {
     console.log('getConfigs >',env);
