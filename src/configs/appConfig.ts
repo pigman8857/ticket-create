@@ -2,8 +2,8 @@ import { AppConfigs, Env } from "../types/configs.types";
 import { SSMClient, GetParametersCommand, GetParametersCommandInput} from "@aws-sdk/client-ssm";
 
 const devConfigs : AppConfigs = {
-    //Access with http://ec2-13-250-22-155.ap-southeast-1.compute.amazonaws.com:3000/
-    host:"ec2-13-250-22-155.ap-southeast-1.compute.amazonaws.com",
+    //Access with http://ec2-18-138-67-142.ap-southeast-1.compute.amazonaws.com:3000/
+    host:"ec2-18-138-67-142.ap-southeast-1.compute.amazonaws.com",
     port:"3000"
 }
 
