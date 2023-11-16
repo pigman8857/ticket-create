@@ -7,7 +7,7 @@ import fastifySwagger, { FastifySwaggerOptions } from "@fastify/swagger";
  * @see https://github.com/fastify/fastify-swagger-ui
  */
 export default fp<FastifySwaggerOptions>(async (fastify) => {
-  
+  console.log('fp swagger.....');
   fastify.register(fastifySwagger, {
     swagger: {
       info: {
