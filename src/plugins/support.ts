@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin'
-import getConfigs, { getEnv } from '../configs/appConfig';
+import { getEnv } from '../configs/appConfig';
 import { AppConfigs } from '../types/configs.types';
 import { getSSMClient, getParameters } from '../aws/ssm';
 export interface SupportPluginOptions {
