@@ -2,9 +2,9 @@ import {
   SSMClient,
   GetParametersCommand,
   GetParametersCommandInput,
-  GetParameterCommandOutput,
+  GetParametersCommandOutput,
 } from "@aws-sdk/client-ssm";
-import { Env } from "../types/configs.types";
+import { Env, SSMParameters } from "../types/configs.types";
 
 export const getSSMClient = (env: Env): SSMClient => {
   console.log("###### getSSMClient() #### ");
@@ -23,8 +23,8 @@ export const getSSMClient = (env: Env): SSMClient => {
 
 export const getParameters = async (
   client: SSMClient
-): Promise<GetParameterCommandOutput | null> => {
-  let data: GetParameterCommandOutput | null = null;
+): Promise<SSMParameters> => {
+  let data: GetParametersCommandOutput | undefined;
   try {
     const params: GetParametersCommandInput = {
       /** input parameters */
@@ -33,12 +33,21 @@ export const getParameters = async (
     };
     const command = new GetParametersCommand(params);
     data = await client.send(command);
-    console.log("GetParametersCommand data  > ", data);
-    console.log("GetParametersCommand data.Parameter  > ", data.Parameter);
+    console.log("GetParametersCommand data  > ", data.Parameters![0]);
   } catch (error) {
     console.error("!!!Error!!! -> ", error);
   } finally {
     console.log("###### getSSMClient() ended #### ");
-    return data;
+
+    if(data){
+        return JSON.parse(data.Parameters![0].Value!) as SSMParameters;
+    }
+    else{
+        return {
+            my_service_host_name : 'localhost',
+            my_service_port : 3000
+        }
+    }   
+    
   }
 };

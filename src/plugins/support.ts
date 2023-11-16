@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin'
-import { getEnv } from '../configs/appConfig';
+import { getEnv , getConfigs } from '../configs/appConfig';
 import { AppConfigs } from '../types/configs.types';
 import { getSSMClient, getParameters } from '../aws/ssm';
 export interface SupportPluginOptions {
@@ -12,13 +12,13 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
   fastify.decorate('someSupport',  () => {
     return 'hugs'
   })
-  console.log('Call getEnv');
   const env = getEnv();
 
   const ssmClient = getSSMClient(env);
-  await getParameters(ssmClient);
-  // console.log('appConfig > ',appConfig);
-  fastify.decorate('configs', {host: 'ec2-18-138-67-142.ap-southeast-1.compute.amazonaws.com', port: '3000'} );
+  const parameterConfigs = await getParameters(ssmClient);
+  const appConfig = getConfigs(env)(parameterConfigs);
+  console.log('appConfig > ',appConfig);
+  fastify.decorate('configs', appConfig);
 })
 
 // When using .decorate you have to specify added properties for Typescript

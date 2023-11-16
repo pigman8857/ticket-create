@@ -1,11 +1,8 @@
-import { AppConfigs, Env } from "../types/configs.types";
+import { AppConfigs, Env, SSMParameters } from "../types/configs.types";
 
-const localConfigs : AppConfigs = {
-    host:"localhost",
-    port:"3000"
-}
 
 export const getEnv = () : Env => {
+    console.log('call getEnv()');
     const node_env = process.env.NODE_ENV as string;
     console.log('node_env > ',node_env);
     switch(node_env){
@@ -23,17 +20,27 @@ export const getEnv = () : Env => {
   
 
 export const getConfigs = (env: Env) => {
-    console.log('getConfigs >',env);
-    return () : AppConfigs  => {
+    console.log('getConfigs env >',env);
+    return (ssmParams: SSMParameters) : AppConfigs  => {
+        console.log('ssmParams > ',ssmParams);
         switch(env){
             case Env.LOCAL : {
-                return localConfigs;
+                return {
+                    host: process.env.LOCAL_HOST_NAME as string,
+                    port: parseInt(process.env.LOCAL_PORT as string)
+                };
             }
             case Env.DEV : {
-                return localConfigs;
+                return {
+                    host: ssmParams.my_service_host_name,
+                    port: ssmParams.my_service_port
+                };;
             }
             default: {
-                return localConfigs;
+                return {
+                    host: ssmParams.my_service_host_name,
+                    port: ssmParams.my_service_port
+                };;
             }
         }
     }
