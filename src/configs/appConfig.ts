@@ -20,9 +20,10 @@ export const getEnv = () : Env => {
   
 
 export const getConfigs = (env: Env) => {
-    console.log('getConfigs env >',env);
+    console.log('appConfig.getConfigs() env >',env);
     return (ssmParams: SSMParameters) : AppConfigs  => {
         console.log('ssmParams > ',ssmParams);
+        console.log('We are in DEV env but we will use localhost');
         switch(env){
             case Env.LOCAL : {
                 return {
@@ -32,8 +33,8 @@ export const getConfigs = (env: Env) => {
             }
             case Env.DEV : {
                 return {
-                    host: ssmParams.my_service_host_name,
-                    port: ssmParams.my_service_port
+                    host: 'localhost',//ssmParams.my_service_host_name,
+                    port: 3000//ssmParams.my_service_port
                 };;
             }
             default: {
